@@ -1,4 +1,3 @@
-from re import I
 import tkinter as tk
 import tkinter.messagebox as tkm
 
