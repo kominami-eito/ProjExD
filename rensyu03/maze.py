@@ -9,7 +9,7 @@ def key_up(event):
     global key
     key = ""
 
-def main_proc():
+def main_proc(): # 上下左右の動きの判定と動かし方
     global cx, cy, mx, my, key
     if key == "Up" and x[my-1][mx] == 0:
         my -= 1
@@ -19,22 +19,14 @@ def main_proc():
         mx -= 1
     if key == "Right" and x[my][mx+1] == 0:
         mx += 1
-    
-    '''if key == "Up":
-        cy -= 100
-    if key == "Down":
-        cy += 100
-    if key == "Left":
-        cx -= 100
-    if key == "Right":
-        cx += 100'''
+
     
     cx, cy = 100*mx+50, 100*my+50
     canvas.coords("tori", cx, cy)
     root.after(100, main_proc)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__": # 迷路の基本的な設定
     root = tk.Tk()
     root.title("迷えるこうかとん")
 
