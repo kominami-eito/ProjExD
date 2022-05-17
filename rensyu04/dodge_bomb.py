@@ -25,9 +25,11 @@ def main():
     screen.blit(tori_img, tori_rect)
 
     X = random.randint(0, 225)
+    Y = random.randint(0, 225)
+    Z = random.randint(0, 225)
     bomb = pg.Surface((20,20))
     bomb.set_colorkey((0,0,0))
-    pg.draw.circle(bomb,(X,X,X),(10, 10),10)
+    pg.draw.circle(bomb,(X,Y,Z),(10, 10),10)
     bomb_rect = bomb.get_rect()
     bomb_rect.centerx = random.randint(0, sc_rect.width)
     bomb_rect.centery = random.randint(0, sc_rect.height)
