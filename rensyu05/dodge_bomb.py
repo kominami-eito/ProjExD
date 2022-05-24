@@ -1,8 +1,6 @@
-from fnmatch import fnmatch
 import pygame as pg
 import sys
 import random
-
 
 class Screen:
     def __init__(self, fn, wh, title):
@@ -54,6 +52,11 @@ class Bomb(pg.sprite.Sprite):
         self.vx *= x # 横方向に画面外なら，横方向速度の符号反転
         self.vy *= y # 縦方向に画面外なら，縦方向速度の符号反転
 
+class Score():
+    def __init__(self, fs):
+        self.font = pg.font.Font(None, fs)
+        self.scores = pg.time.get_ticks()//1000 #スコアの計算　1秒につき1増えるようにする
+        self.txt = self.font.render(str(f"Score:{self.scores}point"), True, (0, 0, 0))
 
 def main():
     clock = pg.time.Clock()
@@ -61,6 +64,7 @@ def main():
     # 練習1
     screen = Screen("fig/pg_bg.jpg", (1600, 900), "逃げろ！こうかとん")
     screen.disp.blit(screen.image, (0,0))
+
     # 練習3
     tori = Bird("fig/3.png", 2, (900, 400))
     screen.disp.blit(tori.image, tori.rect)               # こうかとん画像用のSurfaceを画面用Surfaceに貼り付ける
@@ -74,6 +78,9 @@ def main():
     bombs = pg.sprite.Group()
     for i in range(5):
         bombs.add(Bomb((255, 0, 0), 10,(+i+1, +i+1), screen))
+    
+    score = Score(80)
+    screen.disp.blit(score.txt, (0, 0))
     
     while True:
         # 練習2
@@ -93,6 +100,9 @@ def main():
         
         # 練習8
         if len(pg.sprite.groupcollide(toris, bombs, False, False)) != 0: return
+
+        score = Score(80)
+        screen.disp.blit(score.txt, (0, 0))
 
         pg.display.update()  # 画面の更新
         clock.tick(1000) 
